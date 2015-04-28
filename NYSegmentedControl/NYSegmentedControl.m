@@ -201,8 +201,16 @@
 }
 
 - (void)setTitle:(NSString *)title forSegmentAtIndex:(NSUInteger)index {
+    
     NYSegment *segment = self.segments[index];
-    segment.titleLabel.text = title;
+    [segment.titleLabel setText:title];
+    
+    NSDictionary *attributes = @{NSForegroundColorAttributeName : segment.titleLabel.textColor,
+                                 NSFontAttributeName : segment.titleLabel.font,
+                                 NSKernAttributeName : @(0.6f)};
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:title attributes:attributes];
+    [segment.titleLabel setAttributedText:attributedText];
 }
 
 - (NSString *)titleForSegmentAtIndex:(NSUInteger)index {

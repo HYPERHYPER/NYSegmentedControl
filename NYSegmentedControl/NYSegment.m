@@ -17,7 +17,15 @@ static CGFloat const kMinimumSegmentWidth = 68.0f;
 - (instancetype)initWithTitle:(NSString *)title {
     self = [self initWithFrame:CGRectZero];
     if (self) {
-        self.titleLabel.text = title;
+        
+        [self.titleLabel setText:title];
+        
+        NSDictionary *attributes = @{NSForegroundColorAttributeName : self.titleLabel.textColor,
+                                     NSFontAttributeName : self.titleLabel.font,
+                                     NSKernAttributeName : @(0.6f)};
+        
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:title attributes:attributes];
+        [self.titleLabel setAttributedText:attributedText];
     }
     return self;
 }
